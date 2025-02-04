@@ -1,0 +1,82 @@
+ [
+      {
+        "id": "1",
+        "title": "React Development: A Beginner's Guide",
+        "type": "Tutorial",
+        "description": "A comprehensive guide to get started with React. Learn the fundamentals, from JSX to state management, and begin building dynamic web applications with this popular JavaScript library.",
+        "location": "Online",
+        "author": {
+          "name": "NewTek Solutions",
+          "description": "NewTek Solutions is a leading technology company specializing in web development and digital solutions. We share insights and expertise to help developers and businesses thrive in the digital landscape.",
+          "contactEmail": "contact@teksolutions.com",
+          "contactPhone": "555-555-5555"
+        }
+      },
+      {
+        "id": "2",
+        "title": "Designing for UX: Best Practices",
+        "type": "Blog Post",
+        "location": "Online",
+        "description": "Explore the best practices for creating seamless and intuitive user experiences. From wireframing to user testing, this post covers everything you need to design for the web.",
+        "author": {
+          "name": "Veneer Solutions",
+          "description": "Veneer Solutions is a creative agency specializing in digital design and development. We share insights into the world of UX/UI design and how to make user-centric digital products.",
+          "contactEmail": "contact@loremipsum.com",
+          "contactPhone": "555-555-5555"
+        }
+      },
+      {
+        "id": "3",
+        "title": "Building Modern Web Apps with React.js",
+        "type": "Tutorial",
+        "location": "Online",
+        "description": "Learn how to build modern web applications using React.js. In this tutorial, we’ll cover the key concepts you need to know, from functional components to hooks, to help you create dynamic, high-performance web apps.",
+        "author": {
+          "name": "Dolor Cloud",
+          "description": "Dolor Cloud is a leading technology company focused on innovative digital solutions. We provide tutorials and expert advice on building cutting-edge web applications.",
+          "contactEmail": "contact@dolorsitamet.com",
+          "contactPhone": "555-555-5555"
+        }
+      },
+      {
+        "id": "4",
+        "title": "Intro to React Front-End Development",
+        "type": "Blog Post",
+        "description": "This post introduces you to the world of front-end development with React. Learn how to create interactive web applications and understand the core concepts of React such as state and props.",
+        "location": "Online",
+        "author": {
+          "name": "Alpha Elite",
+          "description": "Alpha Elite is a dynamic startup specializing in digital marketing and web development. We provide blogs and guides to help developers build better digital experiences.",
+          "contactEmail": "contact@adipisicingelit.com",
+          "contactPhone": "555-555-5555"
+        }
+      },
+      {
+        "id": "5",
+        "title": "Building Scalable Web Applications with React",
+        "type": "Tutorial",
+        "description": "Learn how to build scalable web applications using React. This tutorial dives deep into advanced concepts such as Redux, component lifecycle, and performance optimization.",
+        "location": "Online",
+        "author": {
+          "name": "Browning Technologies",
+          "description": "Browning Technologies is a rapidly growing company specializing in e-commerce solutions. We share best practices and technical insights on building scalable and efficient web applications.",
+          "contactEmail": "contact@consecteturadipisicing.com",
+          "contactPhone": "555-555-5555"
+        }
+      },
+      {
+        "id": "6",
+        "title": "Getting Started with React Native for Mobile Development",
+        "type": "Tutorial",
+        "description": "A beginner's guide to React Native, a powerful framework for building mobile applications. Learn how to set up your development environment, create your first app, and dive into mobile-specific components.",
+        "location": "Online",
+        "author": {
+          "name": "Port Solutions INC",
+          "description": "Port Solutions is a leading technology company specializing in software development and digital marketing. We provide tutorials and expert advice on React Native and mobile development.",
+          "contactEmail": "contact@ipsumlorem.com",
+          "contactPhone": "555-555-5555"
+        }
+      }
+    ]
+  
+  
