@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { saveBlogsToLocalStorage, getBlogsFromLocalStorage } from '../utils/localstorage';
+import { getBlogById, updateBlog } from "../utils/api"; // ✅ Import getBlogById
 
 const EditBlogPage = () => {
   const { id } = useParams();
@@ -9,51 +9,43 @@ const EditBlogPage = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [content, setContent] = useState('');
-  const [Author, setAuthor] = useState('');
+  const [author, setAuthor] = useState(''); // ✅ Changed "Author" to "author"
   const [type, setType] = useState('');
-  
+
   // Load the blog data when the page loads
   useEffect(() => {
-    const blogs = getBlogsFromLocalStorage();
-    const blogToEdit = blogs.find(blog => blog.id === parseInt(id));
-
-    if (blogToEdit) {
-      setTitle(blogToEdit.title);
-      setDescription(blogToEdit.description);
-      setContent(blogToEdit.content);
-      setAuthor(blogToEdit.Author);
-      setType(blogToEdit.type);
-    } else {
-      navigate('/blogs'); // If the blog is not found, redirect to blogs page
-    }
-  }, [id, navigate]);
+    const fetchBlog = async () => {
+        try {
+            const blog = await getBlogById(id);
+            if (!blog) {
+                navigate('/blogs'); // Redirect if blog not found
+            } else {
+                setTitle(blog.title);
+                setDescription(blog.description);
+                setContent(blog.content);
+                setAuthor(blog.author); // ✅ Fixes "Author" to "author"
+                setType(blog.type);
+            }
+        } catch (error) {
+            console.error("Error fetching blog:", error);
+            navigate('/blogs'); // Redirect if blog not found
+        }
+    };
+    fetchBlog();
+}, [id, navigate]);
 
   // Handle form submission (update blog)
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const updatedBlog = {
-      id: parseInt(id),
-      title,
-      description,
-      content,
-      Author,
-      type,
-      likes: 0, // Leave likes as-is for now, or fetch from localStorage
-      views: 0, // Leave views as-is for now, or fetch from localStorage
-    };
-
-    // Get existing blogs from localStorage
-    const blogs = getBlogsFromLocalStorage();
-    const updatedBlogs = blogs.map(blog =>
-      blog.id === updatedBlog.id ? updatedBlog : blog
-    );
-
-    // Save the updated blogs to localStorage
-    saveBlogsToLocalStorage(updatedBlogs);
-
-    // Redirect to the updated blog page
-    navigate(`/blogs/${updatedBlog.id}`);
+    try {
+        await updateBlog(id, { title, description, content, author, type }); // ✅ Fixes "Author" to "author"
+        alert("Blog Updated!");
+        navigate(`/blogs/${id}`); // ✅ Redirect to updated blog
+    } catch (error) {
+        console.error("Error updating blog:", error);
+        alert("Failed to update blog. Please try again.");
+    }
   };
 
   return (
@@ -95,7 +87,7 @@ const EditBlogPage = () => {
             <input
               type="text"
               className="mt-1 p-2 border border-gray-300 rounded-lg w-full"
-              value={Author}
+              value={author} // ✅ Changed "Author" to "author"
               onChange={(e) => setAuthor(e.target.value)}
               required
             />

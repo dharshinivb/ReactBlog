@@ -1,46 +1,32 @@
 import React, { useState } from 'react';
-import { saveBlogsToLocalStorage, getBlogsFromLocalStorage } from '../utils/localstorage';
+import { addBlog } from "../utils/api";
 
 const AddBlog = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [content, setContent] = useState('');
-  const [Author, setAuthor] = useState('');
+  const [author, setAuthor] = useState('');
   const [type, setType] = useState('');
   const [alertMessage, setAlertMessage] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const newBlog = {
-      id: new Date().getTime(), // unique ID based on timestamp
-      title,
-      description,
-      content,
-      Author,
-      type,
-      likes: 0, // Initialize likes to 0
-      views: 0, // Initialize views to 0
-    };
+    const newBlog = { title, description, content, author, type };
 
-    const blogs = getBlogsFromLocalStorage();
-    blogs.push(newBlog);
-    saveBlogsToLocalStorage(blogs);
-
-    // Set the alert message
-    setAlertMessage('Blog has been successfully added!');
-
-    // Reset form
-    setTitle('');
-    setDescription('');
-    setContent('');
-    setAuthor('');
-    setType('');
-
-    // Hide the alert message after 3 seconds
-    setTimeout(() => {
-      setAlertMessage('');
-    }, 3000);
+    try {
+      const response = await addBlog(newBlog);
+      if (response) {
+        setAlertMessage("Blog has been successfully added!");
+        setTitle(''); setDescription(''); setContent(''); setAuthor(''); setType('');
+        setTimeout(() => setAlertMessage(''), 3000);
+      } else {
+        setAlertMessage("Failed to add blog.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      setAlertMessage("Error adding blog.");
+    }
   };
 
   return (
@@ -55,7 +41,7 @@ const AddBlog = () => {
           </div>
         )}
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-lg">
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700">Title</label>
             <input
@@ -66,6 +52,7 @@ const AddBlog = () => {
               required
             />
           </div>
+          
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700">Description</label>
             <textarea
@@ -75,25 +62,28 @@ const AddBlog = () => {
               required
             />
           </div>
+
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700">Content</label>
             <textarea
-              className="mt-1 p-2 border border-gray-300 rounded-lg w-full h-48" // Set a larger height for the content box
+              className="mt-1 p-2 border border-gray-300 rounded-lg w-full h-48"
               value={content}
               onChange={(e) => setContent(e.target.value)}
               required
             />
           </div>
+
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700">Author</label>
             <input
               type="text"
               className="mt-1 p-2 border border-gray-300 rounded-lg w-full"
-              value={Author}
+              value={author}
               onChange={(e) => setAuthor(e.target.value)}
               required
             />
           </div>
+
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700">Type</label>
             <input
@@ -104,7 +94,11 @@ const AddBlog = () => {
               required
             />
           </div>
-          <button type="submit" className="bg-indigo-600 text-white py-2 px-4 rounded-lg">
+
+          <button 
+            type="submit"
+            className="w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700"
+          >
             Add Blog
           </button>
         </form>

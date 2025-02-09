@@ -2,7 +2,7 @@
   "name": "blog.json",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
+  "type":"module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -11,6 +11,11 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.0.3",
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongoose": "^8.10.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^7.1.5",
@@ -28,5 +33,10 @@
     "globals": "^15.14.0",
     "json-server": "^1.0.0-beta.3",
     "vite": "^6.0.5"
-  }
+  },
+  "description": "This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.",
+  "main": "eslint.config.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
